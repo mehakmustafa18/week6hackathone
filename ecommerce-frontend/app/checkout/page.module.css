@@ -1,0 +1,242 @@
+.wrapper {
+  background-color: var(--light-gray);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.breadcrumbs {
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+}
+
+.breadcrumbs a {
+  color: var(--black);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.checkoutForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.inputGroup input, .inputGroup select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.inputGroup input:focus {
+  border-color: var(--black);
+}
+
+.paymentOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paymentOption {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.paymentOption:hover {
+  border-color: var(--black);
+  background: #fafafa;
+}
+
+.paymentOption input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--black);
+}
+
+.paymentInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.paymentLabel {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.paymentDesc {
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #fdfdfd;
+}
+
+.orderSummary {
+  position: sticky;
+  top: 100px;
+}
+
+.summaryCard {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.summaryCard h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0.95rem;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.itemName {
+  font-weight: 500;
+}
+
+.pointsFlag {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: #b8860b;
+  font-weight: 700;
+}
+
+.summaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--dark-gray);
+}
+
+.total {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--black);
+  margin-top: 0.5rem;
+}
+
+.pointsLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #b8860b;
+  font-weight: 600;
+}
+
+.loyaltyNotice {
+  background: rgba(255, 215, 0, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #856404;
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .fullWidth {
+    grid-column: span 1;
+  }
+}

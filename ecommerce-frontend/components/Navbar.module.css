@@ -1,0 +1,274 @@
+.header {
+  width: 100%;
+  background: var(--white);
+}
+
+.promoBar {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+}
+
+.promoBar a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1rem;
+  color: var(--black);
+  transition: color 0.2s;
+}
+
+.searchBar {
+  flex: 1;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  gap: 0.5rem;
+}
+
+.searchIcon {
+  color: var(--dark-gray);
+}
+
+.searchBar input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pointsBadge {
+  background: var(--light-gray);
+  padding: 0.5rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.userMenuWrapper {
+  position: relative;
+}
+
+.userDropdown {
+  position: absolute;
+  top: 130%;
+  right: 0;
+  background: var(--white);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  width: 200px;
+  z-index: 1000;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfo {
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--black);
+}
+
+.userRole {
+  font-size: 0.75rem;
+  color: var(--dark-gray);
+  text-transform: uppercase;
+}
+
+.userDropdown hr {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid var(--light-gray);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--black);
+  transition: background 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdownItem:hover {
+  background: var(--light-gray);
+}
+
+.logoutBtn {
+  color: #ff4d4d;
+}
+
+.logoutBtn:hover {
+  background: #fff5f5;
+}
+
+.actionBtn {
+  color: var(--black);
+  transition: opacity 0.2s;
+}
+
+.actionBtn:hover {
+  opacity: 0.7;
+}
+
+.mobileMenu {
+  display: none;
+  cursor: pointer;
+}
+
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobileOverlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileDrawer {
+  position: absolute;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: var(--white);
+  transition: all 0.3s ease;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mobileOverlay.active .mobileDrawer {
+  left: 0;
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeBtn {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.mobileNavLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobileNavLinks a {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .navLinks, .searchBar {
+    display: none;
+  }
+  
+  .mobileMenu {
+    display: block;
+    margin-right: 0.5rem;
+  }
+
+  .leftSection {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .actions {
+    gap: 0.75rem;
+  }
+
+  .pointsBadge {
+    display: none; /* Hide points on very small screens to save space */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+  
+  .actions {
+    gap: 0.5rem;
+  }
+}
+

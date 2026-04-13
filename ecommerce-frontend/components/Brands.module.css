@@ -1,0 +1,39 @@
+.brandsBar {
+  background: var(--black);
+  padding: 2.5rem 0;
+  margin-top: -80px; /* Pull banner up over hero section */
+  position: relative;
+  z-index: 10;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.brandName {
+  color: var(--white);
+  font-size: 2.5rem;
+  font-weight: 800;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .brandsBar {
+    margin-top: 0;
+    padding: 2rem 0;
+  }
+
+  .container {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .brandName {
+    font-size: 1.25rem;
+  }
+}
+

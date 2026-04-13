@@ -1,0 +1,232 @@
+/* ============================================================
+   ProductSelection.module.css — Figma Exact Layout
+   ============================================================ */
+
+.selection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 0.5rem;
+}
+
+/* Product name */
+.title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+/* Stars row */
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--dark-gray);
+  margin-bottom: 1rem;
+}
+.stars { display: flex; }
+
+/* Price row */
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.originalPrice {
+  color: var(--dark-gray);
+  text-decoration: line-through;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.discount {
+  background: rgba(255, 51, 51, 0.1);
+  color: #ff3333;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Description */
+.description {
+  color: var(--dark-gray);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Horizontal rule */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin: 1.25rem 0;
+}
+
+/* Colors + Sizes shared section */
+.variantsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.sectionLabel {
+  color: var(--dark-gray);
+  font-size: 0.95rem;
+}
+
+/* Color circles */
+.colorsWrapper {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.colorCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.colorCircle:hover { transform: scale(1.1); }
+.activeColor {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+}
+
+/* Size pills */
+.sizesWrapper {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.sizePill {
+  padding: 0.55rem 1.2rem;
+  background: #f0f0f0;
+  border-radius: 50px;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sizePill:hover { background: #e0e0e0; color: #000; }
+.activeSize {
+  background: #000;
+  color: #fff;
+}
+
+/* Loyalty / Points section */
+.loyaltyOption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.loyaltyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loyaltyTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+.pointsCost {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+}
+.pointToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  background: #f5f5f5;
+  padding: 0.875rem;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+.pointToggle:hover { background: #eee; }
+.toggleLabel { font-size: 0.9rem; }
+.pointCalc { font-size: 0.85rem; color: var(--dark-gray); }
+.error { color: #ff4d4d; margin-left: 0.5rem; }
+
+.earnMsg {
+  font-size: 0.875rem;
+  color: var(--dark-gray);
+}
+
+/* ── Add to Cart ── */
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.quantity {
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  border-radius: 50px;
+  gap: 1.25rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.quantity button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem 0;
+}
+.quantity span { min-width: 20px; text-align: center; }
+
+.stockWarning {
+  margin-top: 0.5rem;
+  color: #f59e0b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .title { font-size: 1.8rem; }
+  .price { font-size: 1.5rem; }
+  .originalPrice { font-size: 1.25rem; }
+}
+
+@media (max-width: 600px) {
+  .actions { 
+    flex-direction: row; /* Keep row for main actions if possible, or stack on very small */
+    gap: 0.75rem;
+  }
+  .quantity {
+    padding: 0 0.8rem;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+  }
+  .quantity {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .title { font-size: 1.5rem; }
+}
+

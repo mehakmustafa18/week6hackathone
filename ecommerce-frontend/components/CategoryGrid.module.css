@@ -1,0 +1,126 @@
+.sectionBox {
+  background: var(--light-gray);
+  border-radius: 40px;
+  padding: 4rem;
+  margin: 4rem 0;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background: var(--white);
+  border-radius: 20px;
+  height: 289px;
+  padding: 1.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.categoryCard:hover {
+  transform: scale(1.02);
+}
+
+.small {
+  grid-column: span 1;
+}
+
+.large {
+  grid-column: span 2;
+}
+
+.catName {
+  font-size: 2.25rem;
+  font-weight: 800;
+  position: relative;
+  z-index: 2;
+  color: var(--black);
+}
+
+.catImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  z-index: 1;
+  /* Specific alignment to show person on the right */
+  object-position: right;
+}
+
+.imgCasual {
+  width: 130%;
+  object-position: left center;
+  left: 174px;
+}
+
+.imgFormal {
+  width: 120%;
+  object-position: left center;
+  left: 225px;
+}
+
+.imgParty {
+  width: 100%;
+  object-position: right center;
+  left: 100px;
+}
+
+.imgGym {
+  width: 110%;
+  object-position: left center;
+  left: 40px;
+  right: auto;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .small,
+  .large {
+    grid-column: span 1;
+  }
+
+  .sectionBox {
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .catName {
+    font-size: 1.5rem;
+  }
+
+  .catImage {
+    width: auto !important;
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    top: auto;
+    height: 120%;
+  }
+
+  .imgCasual { left: auto; right: -60px; }
+  .imgFormal { left: auto; right: -40px; }
+  .imgParty { left: auto; right: -20px; }
+  .imgGym { left: auto; right: -10px; }
+}

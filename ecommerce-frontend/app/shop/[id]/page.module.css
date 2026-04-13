@@ -1,0 +1,46 @@
+/* ============================================================
+   Product Detail Page — app/shop/[id]/page.module.css
+   ============================================================ */
+
+.wrapper {
+  padding-top: 1.5rem;
+}
+
+/* ── Breadcrumbs ── */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--dark-gray);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+.breadcrumbs a { color: var(--dark-gray); }
+.breadcrumbs a:hover { color: var(--black); }
+.breadcrumbs span { color: var(--black); font-weight: 600; }
+
+/* ── Hero Layout ── */
+.productLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  align-items: start;
+}
+
+/* ── You Might Also Like ── */
+.recommendationGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0 5rem;
+}
+
+/* ── responsiveness ── */
+@media (max-width: 1024px) {
+  .productLayout { grid-template-columns: 1fr; gap: 2rem; }
+  .recommendationGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .recommendationGrid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+}

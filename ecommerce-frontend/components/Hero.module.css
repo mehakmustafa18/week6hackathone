@@ -1,0 +1,186 @@
+.heroSection {
+  background-color: #F2F0F1;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+  padding-top: 2rem;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.textSide {
+  flex: 1;
+  z-index: 2;
+  padding: 2rem 0 4rem 0;
+}
+
+.title {
+  font-size: 5.5rem;
+  line-height: 1;
+  font-weight: 900;
+  margin-bottom: 2rem;
+}
+
+.description {
+  color: var(--dark-gray);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+}
+
+.stats {
+  display: flex;
+  margin-top: 3rem;
+  gap: 2.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.statItem h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.statItem p {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+.statDivider {
+  width: 1px;
+  height: 70px;
+  background: rgba(0,0,0,0.1);
+}
+
+.imageSide {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.heroImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.heroImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.starOne {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-size: 6rem;
+  color: var(--black);
+}
+
+.starTwo {
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  font-size: 3rem;
+  color: var(--black);
+}
+
+@media (max-width: 1200px) {
+  .title {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroSection {
+    padding: 2rem 0;
+    min-height: auto;
+  }
+  
+  .content {
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .title {
+    font-size: 3rem;
+  }
+  
+  .description {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .stats {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .imageSide {
+    width: 100%;
+    height: 400px;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+
+  .heroImageContainer {
+    justify-content: center;
+  }
+
+  .heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .starOne, .starTwo {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .statDivider {
+    display: none;
+  }
+
+  .statItem:last-child {
+    grid-column: span 2;
+    text-align: center;
+  }
+
+  .imageSide {
+    height: 300px;
+  }
+}
+

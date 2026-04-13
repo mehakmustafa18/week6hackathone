@@ -1,0 +1,64 @@
+.wrapper {
+  overflow-x: hidden;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.viewAllRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.viewAllBtn {
+  padding: 1rem 3.5rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.viewAllBtn:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  max-width: var(--max-width);
+  margin: 4rem auto;
+  opacity: 0.2;
+}
+
+@media (max-width: 1024px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .divider {
+    margin: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .viewAllBtn {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .loading {
+    padding: 3rem 0;
+  }
+}
+

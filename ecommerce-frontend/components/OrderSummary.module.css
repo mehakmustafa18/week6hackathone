@@ -1,0 +1,89 @@
+.card {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  background: var(--white);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  color: var(--dark-gray);
+}
+
+.value {
+  color: var(--black);
+  font-weight: 700;
+}
+
+.discount {
+  color: var(--accent);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin: 1.5rem 0;
+}
+
+.totalRow {
+  color: var(--black);
+}
+
+.totalValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.promo {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.promoInput {
+  flex: 1;
+  background: var(--light-gray);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 0.75rem;
+}
+
+.promoInput input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.75rem 0;
+}
+
+.checkoutBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1200px) {
+  .promo {
+    flex-direction: column;
+  }
+}

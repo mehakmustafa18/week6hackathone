@@ -1,0 +1,188 @@
+.authContainer {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-gray);
+  padding: 2rem;
+}
+
+.authCard {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 500px;
+}
+
+.authCard h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--dark-gray);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 600;
+  color: var(--black);
+}
+
+.inputGroup input {
+  padding: 1rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inputGroup input:focus {
+  border-color: var(--black);
+}
+
+.submitBtn {
+  background: var(--black);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.submitBtn:hover {
+  background: #333;
+}
+
+.submitBtn:disabled {
+  background: var(--dark-gray);
+  cursor: not-allowed;
+}
+
+.footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--dark-gray);
+}
+
+.footer a {
+  color: var(--black);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--dark-gray);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.divider:not(:empty)::before {
+  margin-right: 1rem;
+}
+
+.divider:not(:empty)::after {
+  margin-left: 1rem;
+}
+
+.googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--white);
+  color: var(--black);
+  padding: 1rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.googleBtn:hover {
+  background: #F8F8F8;
+  border-color: var(--dark-gray);
+}
+
+.githubBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #24292e;
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.githubBtn:hover {
+  background: #333;
+}
+
+.discordBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #5865F2;
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+}
+
+.discordBtn:hover {
+  background: #4752C4;
+}
+
+.socialGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.googleIcon, .socialIcon {
+  width: 20px;
+  height: 20px;
+}

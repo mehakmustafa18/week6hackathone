@@ -1,0 +1,184 @@
+.wrapper {
+  padding-top: 1.5rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--dark-gray);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.breadcrumbs span {
+  color: var(--black);
+}
+
+.main {
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 5rem;
+}
+
+.sidebarCol {
+  flex: 0 0 295px;
+}
+
+.contentCol {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--dark-gray);
+}
+
+.sort span {
+  color: var(--black);
+  font-weight: 600;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.navBtn:hover {
+  background: var(--light-gray);
+}
+
+.pages {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pageBtn, .pageBtnActive {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.pageBtnActive {
+  background: rgba(0,0,0,0.05);
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  color: var(--dark-gray);
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.filterToggle {
+  display: none;
+  background: var(--light-gray);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 2500;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobileOverlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 1024px) {
+  .sidebarCol {
+    flex: 0;
+  }
+  
+  .filterToggle {
+    display: block;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .header h2 {
+    font-size: 1.5rem;
+  }
+
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .sort {
+    font-size: 0.9rem;
+  }
+}
+
