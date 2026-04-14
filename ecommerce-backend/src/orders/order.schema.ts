@@ -19,6 +19,7 @@ export enum PaymentMethod {
     CARD = 'card',
     POINTS = 'points',
     HYBRID = 'hybrid',
+    STRIPE = 'stripe',
 }
 
 export enum PaymentStatus {
@@ -114,6 +115,14 @@ export class Order {
     @ApiProperty()
     @Prop()
     orderNumber: string;
+    
+    @ApiProperty()
+    @Prop()
+    stripeSessionId?: string;
+    
+    @ApiProperty()
+    @Prop()
+    stripePaymentIntentId?: string;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

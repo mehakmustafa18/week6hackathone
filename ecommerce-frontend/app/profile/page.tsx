@@ -21,7 +21,7 @@ interface Order {
 }
 
 function ProfileContent() {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const searchParams = useSearchParams();
   const highlightedOrderId = searchParams.get('orderId');
   
@@ -42,6 +42,8 @@ function ProfileContent() {
 
     if (user) {
       fetchOrders();
+      // Also refresh user profile once to catch any background points updates (e.g. from Stripe)
+      refreshUser();
     }
   }, [user]);
 

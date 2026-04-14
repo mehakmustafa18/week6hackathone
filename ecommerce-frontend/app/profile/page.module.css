@@ -269,6 +269,226 @@
   text-align: center;
 }
 
+/* === Order Detail Page Styles === */
+.orderDetailGrid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+}
+
+.orderDetailMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.itemRow {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.itemRow:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.itemImage {
+  width: 80px;
+  height: 80px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.itemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemDetails h3 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.itemDetails p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.pointsBadge {
+  font-size: 0.8rem;
+  background: #fffef0;
+  color: #b8860b;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.itemPrice {
+  text-align: right;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.infoCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.infoCardTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoCardBody {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.summaryCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 2rem;
+}
+
+.summaryTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.summaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summaryDivider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 0.5rem 0;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.pointsEarnedBanner {
+  margin-top: 2rem;
+  background: #f0fdf4;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #dcfce7;
+  font-size: 0.9rem;
+  color: #166534;
+  font-weight: 600;
+}
+
+.orderInfoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.orderDetailHeader {
+  padding: 3rem 0;
+}
+
+.orderDetailHeaderInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.backLink {
+  color: white;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.orderDetailTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.orderDetailSubtitle {
+  opacity: 0.7;
+}
+
+.pending { background: #fff8e1; color: #f57f17; }
+
+/* === Responsive: Tablet (1024px) === */
 @media (max-width: 1024px) {
   .profileLayout {
     grid-template-columns: 1fr;
@@ -280,5 +500,184 @@
   }
   .pointsCard {
     width: 100%;
+  }
+  .orderDetailGrid {
+    grid-template-columns: 1fr;
+  }
+  .summaryCard {
+    position: static;
+  }
+}
+
+/* === Responsive: Tablet (768px) === */
+@media (max-width: 768px) {
+  .profileHeader {
+    padding: 2.5rem 0;
+    margin-bottom: 2rem;
+  }
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+  }
+  .userDetails h1 {
+    font-size: 1.5rem;
+  }
+  .userInfo {
+    gap: 1.25rem;
+  }
+  .pointsCard {
+    min-width: unset;
+    padding: 1.5rem;
+  }
+  .pointsInfo h3 {
+    font-size: 1.25rem;
+  }
+  .sectionHeader h2 {
+    font-size: 1.35rem;
+  }
+  .orderCard {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  .orderTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .orderMeta {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .orderBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+  .orderDetailTitle {
+    font-size: 1.75rem;
+  }
+  .orderDetailHeader {
+    padding: 2rem 0;
+  }
+  .card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  .infoCard {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+  .summaryCard {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+}
+
+/* === Responsive: Mobile (480px) === */
+@media (max-width: 480px) {
+  .profileHeader {
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+  }
+  .avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+  .userDetails h1 {
+    font-size: 1.25rem;
+  }
+  .userInfo {
+    gap: 1rem;
+  }
+  .pointsCard {
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 14px;
+  }
+  .pointsInfo h3 {
+    font-size: 1.1rem;
+  }
+  .sectionHeader h2 {
+    font-size: 1.15rem;
+  }
+  .sectionHeader {
+    margin-bottom: 1.25rem;
+  }
+  .orderCard {
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
+  .orderMeta {
+    gap: 1rem;
+  }
+  .val {
+    font-size: 0.9rem;
+  }
+  .label {
+    font-size: 0.7rem;
+  }
+  .emptyState {
+    padding: 3rem 1.5rem;
+  }
+  .orderDetailTitle {
+    font-size: 1.5rem;
+  }
+  .orderDetailSubtitle {
+    font-size: 0.85rem;
+  }
+  .card {
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
+  .cardTitle {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+  .itemRow {
+    gap: 1rem;
+  }
+  .itemImage {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+  }
+  .itemDetails h3 {
+    font-size: 0.95rem;
+  }
+  .itemDetails p {
+    font-size: 0.8rem;
+  }
+  .itemPrice {
+    font-size: 0.9rem;
+  }
+  .infoCard {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+  .infoCardTitle {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  .infoCardBody {
+    font-size: 0.85rem;
+  }
+  .summaryCard {
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
+  .summaryTotal {
+    font-size: 1.1rem;
+  }
+  .orderInfoRow {
+    font-size: 0.8rem;
+  }
+  .backLink {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
   }
 }

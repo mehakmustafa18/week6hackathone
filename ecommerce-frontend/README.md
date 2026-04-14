@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Admin Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Super Admin** | `superadmin@shop.com` | `Admin@123` |
+| **Admin** | `admin@shop.com` | `Admin@123` |
+
+> [!NOTE]
+> These credentials can be initialized or reset by running the seed script in the backend directory:
+> ```bash
+> cd ecommerce-backend
+> node seed.js
+> ```
+

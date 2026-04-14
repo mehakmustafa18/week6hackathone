@@ -34,7 +34,7 @@ export default function AdminProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  
+
   const PRESET_SIZES = ['XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large', '3X-Large', '4X-Large'];
 
   // Form State for Adding/Editing
@@ -75,7 +75,7 @@ export default function AdminProductsPage() {
   const handleInputChange = (e: any) => {
     const { name, value, type, checked } = e.target;
     let parsedValue: any = value;
-    
+
     if (type === 'checkbox') {
       parsedValue = checked;
     } else if (type === 'number') {
@@ -92,7 +92,7 @@ export default function AdminProductsPage() {
   const handleSizeToggle = (size: string) => {
     setFormData(prev => ({
       ...prev,
-      sizes: prev.sizes.includes(size) 
+      sizes: prev.sizes.includes(size)
         ? prev.sizes.filter(s => s !== size)
         : [...prev.sizes, size]
     }));
@@ -135,12 +135,12 @@ export default function AdminProductsPage() {
     const data = new FormData();
     data.append('file', file);
     data.append('upload_preset', 'ecommerce'); // specific preset
-    
+
     const response = await fetch(`https://api.cloudinary.com/v1_1/du6zpscb8/image/upload`, {
       method: 'POST',
       body: data
     });
-    
+
     if (!response.ok) throw new Error('Failed to upload image');
     const result = await response.json();
     return result.secure_url;
@@ -148,7 +148,7 @@ export default function AdminProductsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate that ALL colors have a file
     for (let c of colors) {
       if (!c.name || !c.file) {
@@ -212,8 +212,8 @@ export default function AdminProductsPage() {
     }
   };
 
-  const filteredProducts = products.filter(p => 
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredProducts = products.filter(p =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -229,9 +229,9 @@ export default function AdminProductsPage() {
       <div className={styles.controls}>
         <div className={styles.search}>
           <Search size={20} color="#666" />
-          <input 
-            type="text" 
-            placeholder="Search products by name or category..." 
+          <input
+            type="text"
+            placeholder="Search products by name or category..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -239,7 +239,8 @@ export default function AdminProductsPage() {
       </div>
 
       <div className={styles.recentTable}>
-        <table className={styles.table}>
+        <div className={styles.tableWrapper}>
+          <table className={styles.table}>
           <thead>
             <tr>
               <th>Image</th>
@@ -258,9 +259,9 @@ export default function AdminProductsPage() {
             ) : filteredProducts.map((product) => (
               <tr key={product._id}>
                 <td>
-                  <img 
-                    src={product.colors?.[0]?.imageUrl || product.images?.[0] || 'https://via.placeholder.com/50'} 
-                    alt="product" 
+                  <img
+                    src={product.colors?.[0]?.imageUrl || product.images?.[0] || 'https://via.placeholder.com/50'}
+                    alt="product"
                     style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }}
                   />
                 </td>
@@ -273,25 +274,25 @@ export default function AdminProductsPage() {
                   </div>
                 </td>
                 <td>
-                    <span className="tag-gray">{product.category}</span>
+                  <span className="tag-gray">{product.category}</span>
                 </td>
                 <td>
-                    {product.isOnSale ? (
-                        <div>
-                             <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.8rem' }}>${product.price}</span>
-                             <br />
-                             <span style={{ color: '#e53935' }}>${product.salePrice}</span>
-                        </div>
-                    ) : `$${product.price}`}
+                  {product.isOnSale ? (
+                    <div>
+                      <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.8rem' }}>${product.price}</span>
+                      <br />
+                      <span style={{ color: '#e53935' }}>${product.salePrice}</span>
+                    </div>
+                  ) : `$${product.price}`}
                 </td>
                 <td>
-                    <span style={{ color: product.stock < 10 ? '#e53935' : 'inherit', fontWeight: product.stock < 10 ? 700 : 400 }}>
-                        {product.stock}
-                    </span>
+                  <span style={{ color: product.stock < 10 ? '#e53935' : 'inherit', fontWeight: product.stock < 10 ? 700 : 400 }}>
+                    {product.stock}
+                  </span>
                 </td>
                 <td>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button className={styles.iconBtn} onClick={() => window.location.href=`/shop/${product._id}`} title="View"><Eye size={18} /></button>
+                    <button className={styles.iconBtn} onClick={() => window.location.href = `/shop/${product._id}`} title="View"><Eye size={18} /></button>
                     <button className={styles.iconBtn} title="Edit"><Edit2 size={18} /></button>
                     <button className={styles.iconBtn} style={{ color: '#e53935' }} onClick={() => deleteProduct(product._id)} title="Delete"><Trash2 size={18} /></button>
                   </div>
@@ -301,13 +302,14 @@ export default function AdminProductsPage() {
           </tbody>
         </table>
       </div>
+    </div>
 
       {showModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
               <h2 style={{ margin: 0 }}>Create New Product</h2>
-              <button 
+              <button
                 onClick={() => setShowModal(false)}
                 style={{ background: '#f5f5f5', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}
               >
@@ -322,32 +324,32 @@ export default function AdminProductsPage() {
                   <label>Product Name</label>
                   <input name="name" required value={formData.name} onChange={handleInputChange} placeholder="e.g. Classic Oversized Hoodie" />
                 </div>
-                
+
                 <div className={styles.inputGroup} style={{ marginTop: '1rem' }}>
                   <label>Description</label>
                   <textarea name="description" required value={formData.description} onChange={handleInputChange} rows={3} placeholder="Tell your customers about this item..." />
                 </div>
 
                 <div className={styles.inputGrid} style={{ marginTop: '1rem' }}>
-                    <div className={styles.inputGroup}>
+                  <div className={styles.inputGroup}>
                     <label>Category</label>
                     <select name="category" value={formData.category} onChange={handleInputChange}>
-                        <option>T-shirts</option>
-                        <option>Shorts</option>
-                        <option>Shirts</option>
-                        <option>Hoodie</option>
-                        <option>Jeans</option>
-                        <option>Accessories</option>
+                      <option>T-shirts</option>
+                      <option>Shorts</option>
+                      <option>Shirts</option>
+                      <option>Hoodie</option>
+                      <option>Jeans</option>
+                      <option>Accessories</option>
                     </select>
-                    </div>
-                    <div className={styles.inputGroup}>
-                        <label>Display Section</label>
-                        <select name="displaySection" value={formData.displaySection} onChange={handleInputChange}>
-                            <option value="none">Default (None)</option>
-                            <option value="new-arrivals">New Arrivals</option>
-                            <option value="top-selling">Top Selling</option>
-                        </select>
-                    </div>
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label>Display Section</label>
+                    <select name="displaySection" value={formData.displaySection} onChange={handleInputChange}>
+                      <option value="none">Default (None)</option>
+                      <option value="new-arrivals">New Arrivals</option>
+                      <option value="top-selling">Top Selling</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -374,20 +376,20 @@ export default function AdminProductsPage() {
                 </div>
 
                 {formData.purchaseType !== 'money' && (
-                    <div className={styles.inputGroup} style={{ marginTop: '1rem' }}>
-                        <label>Loyalty Points Price</label>
-                        <input type="number" name="pointsPrice" value={formData.pointsPrice} onChange={handleInputChange} placeholder="e.g. 500" />
-                    </div>
+                  <div className={styles.inputGroup} style={{ marginTop: '1rem' }}>
+                    <label>Loyalty Points Price</label>
+                    <input type="number" name="pointsPrice" value={formData.pointsPrice} onChange={handleInputChange} placeholder="e.g. 500" />
+                  </div>
                 )}
 
                 <div className={styles.checkboxGroup} style={{ marginTop: '1.25rem', padding: '12px', background: '#fff', borderRadius: '12px', border: '1px solid #eee' }}>
-                    <input type="checkbox" name="isOnSale" checked={formData.isOnSale} onChange={handleInputChange} id="isOnSale" />
-                    <label htmlFor="isOnSale" style={{ cursor: 'pointer', flex: 1 }}>Set this product on Sale</label>
-                    {formData.isOnSale && (
-                        <div style={{ width: '120px' }}>
-                            <input type="number" name="salePrice" value={formData.salePrice} onChange={handleInputChange} placeholder="Sale $" style={{ padding: '4px 8px' }} />
-                        </div>
-                    )}
+                  <input type="checkbox" name="isOnSale" checked={formData.isOnSale} onChange={handleInputChange} id="isOnSale" />
+                  <label htmlFor="isOnSale" style={{ cursor: 'pointer', flex: 1 }}>Set this product on Sale</label>
+                  {formData.isOnSale && (
+                    <div style={{ width: '120px' }}>
+                      <input type="number" name="salePrice" value={formData.salePrice} onChange={handleInputChange} placeholder="Sale $" style={{ padding: '4px 8px' }} />
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -395,7 +397,7 @@ export default function AdminProductsPage() {
                 <h3><Sliders size={18} /> Size Variants</h3>
                 <div className={styles.sizeGrid}>
                   {PRESET_SIZES.map(size => (
-                    <button 
+                    <button
                       type="button"
                       key={size}
                       onClick={() => handleSizeToggle(size)}
@@ -406,48 +408,48 @@ export default function AdminProductsPage() {
                   ))}
                 </div>
               </div>
-              
-              <div className={styles.formSection}>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-                    <h3 style={{ margin: 0 }}><Upload size={18} /> Color Variants & Images</h3>
-                    <button type="button" onClick={addColorVariant} style={{ display: 'flex', alignItems: 'center', gap: '4px', background: '#000', color: '#fff', padding: '6px 12px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}>
-                      <Plus size={16} /> Add Variant
-                    </button>
-                 </div>
 
-                 {colors.map((color, index) => (
-                   <div key={index} className={styles.variantCard}>
-                      <div className={styles.inputGroup} style={{ flex: 1, marginBottom: 0 }}>
-                        <label>Color</label>
-                        <input value={color.name} onChange={(e) => updateColor(index, 'name', e.target.value)} required placeholder="e.g. Olive" />
+              <div className={styles.formSection}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                  <h3 style={{ margin: 0 }}><Upload size={18} /> Color Variants & Images</h3>
+                  <button type="button" onClick={addColorVariant} style={{ display: 'flex', alignItems: 'center', gap: '4px', background: '#000', color: '#fff', padding: '6px 12px', borderRadius: '8px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}>
+                    <Plus size={16} /> Add Variant
+                  </button>
+                </div>
+
+                {colors.map((color, index) => (
+                  <div key={index} className={styles.variantCard}>
+                    <div className={styles.inputGroup} style={{ flex: 1, marginBottom: 0 }}>
+                      <label>Color</label>
+                      <input value={color.name} onChange={(e) => updateColor(index, 'name', e.target.value)} required placeholder="e.g. Olive" />
+                    </div>
+                    <div className={styles.inputGroup} style={{ width: '44px', marginBottom: 0 }}>
+                      <label>Hex</label>
+                      <input type="color" value={color.hex} onChange={(e) => updateColor(index, 'hex', e.target.value)} className={styles.colorPicker} />
+                    </div>
+                    <div className={styles.inputGroup} style={{ flex: 1.5, marginBottom: 0 }}>
+                      <label>Product Image</label>
+                      <div className={styles.uploadArea}>
+                        <Upload size={18} color="#999" />
+                        <span style={{ fontSize: '0.75rem', marginLeft: '8px', color: '#666' }}>
+                          {color.file ? color.file.name : 'Choose Image'}
+                        </span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                              updateColor(index, 'file', e.target.files[0]);
+                            }
+                          }}
+                        />
                       </div>
-                      <div className={styles.inputGroup} style={{ width: '44px', marginBottom: 0 }}>
-                        <label>Hex</label>
-                        <input type="color" value={color.hex} onChange={(e) => updateColor(index, 'hex', e.target.value)} className={styles.colorPicker} />
-                      </div>
-                      <div className={styles.inputGroup} style={{ flex: 1.5, marginBottom: 0 }}>
-                        <label>Product Image</label>
-                        <div className={styles.uploadArea}>
-                            <Upload size={18} color="#999" />
-                            <span style={{ fontSize: '0.75rem', marginLeft: '8px', color: '#666' }}>
-                                {color.file ? color.file.name : 'Choose Image'}
-                            </span>
-                            <input 
-                                type="file" 
-                                accept="image/*"
-                                onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) {
-                                    updateColor(index, 'file', e.target.files[0]);
-                                    }
-                                }}
-                            />
-                        </div>
-                      </div>
-                      <button type="button" onClick={() => removeColorVariant(index)} style={{ color: '#e53935', background: 'transparent', border: 'none', cursor: 'pointer', alignSelf: 'center', marginTop: '16px' }}>
-                         <Trash2 size={20} />
-                      </button>
-                   </div>
-                 ))}
+                    </div>
+                    <button type="button" onClick={() => removeColorVariant(index)} style={{ color: '#e53935', background: 'transparent', border: 'none', cursor: 'pointer', alignSelf: 'center', marginTop: '16px' }}>
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                ))}
               </div>
 
               <div className={styles.modalActions}>

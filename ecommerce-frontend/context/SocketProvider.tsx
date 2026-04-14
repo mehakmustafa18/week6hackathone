@@ -14,7 +14,7 @@ interface SocketContextType {
 const SocketContext = createContext<SocketContextType | undefined>(undefined);
 
 export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, token } = useAuth();
+  const { user, token, refreshUser } = useAuth();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -111,7 +111,13 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     // Handle Loyalty Points Notifications
     newSocket.on('pointsNotification', (data) => {
+      console.log('[Socket] Points update received:', data);
       showPersistentToast(data.message, '🌟');
+      // Refresh user data with a slight delay to ensure DB consistency
+      setTimeout(() => {
+        console.log('[Socket] Triggering profile refresh for points update...');
+        refreshUser();
+      }, 1500); // 1.5s delay to allow DB transaction to be fully visible
     });
 
     // Handle General/Review Notifications

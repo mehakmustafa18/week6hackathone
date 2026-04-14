@@ -89,17 +89,23 @@ export default function CheckoutPage() {
       };
 
       const { data } = await api.post('/orders', orderData);
-      toast.success('🎉 Order placed successfully!');
+      toast.success('🎉 Order created successfully!');
       
       // Manually clear local cart state for immediate UI feedback
       setCart({ items: [], totalAmount: 0, totalPoints: 0 });
       
-      // Refresh user to update loyalty points balance and clear cart count
-      await refreshUser();
-      await refreshCart();
-      
-      // Redirect to order success/profile
-      router.push(`/profile?orderId=${data._id}`);
+      // Handle Stripe redirect
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        // Handle orders with 0 money (points only) or non-stripe payments
+        toast.success(`Order placed successfully! Order #${data.orderNumber}`);
+        // Refresh user to update loyalty points balance and clear cart count
+        await refreshUser();
+        await refreshCart();
+        // Cart is cleared by backend
+        router.push(`/profile?orderId=${data._id}`);
+      }
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Failed to place order');
     } finally {
@@ -163,11 +169,18 @@ export default function CheckoutPage() {
                   </div>
                 </label>
                 
-                <label className={`${styles.paymentOption} ${styles.disabled}`}>
-                  <input type="radio" name="paymentMethod" value="card" disabled />
+                <label className={`${styles.paymentOption} ${cart?.totalAmount === 0 ? styles.disabledOption : ''}`}>
+                  <input 
+                    type="radio" 
+                    name="paymentMethod" 
+                    value="stripe" 
+                    checked={formData.paymentMethod === 'stripe'} 
+                    onChange={handleChange}
+                    disabled={cart?.totalAmount === 0}
+                  />
                   <div className={styles.paymentInfo}>
-                    <p className={styles.paymentLabel}>Credit / Debit Card</p>
-                    <p className={styles.paymentDesc}>Available soon...</p>
+                    <p className={styles.paymentLabel}>Credit / Debit Card {cart?.totalAmount === 0 && <span style={{ fontSize: '0.7rem', color: '#e53935' }}>(Not available for $0 orders)</span>}</p>
+                    <p className={styles.paymentDesc}>Secure payment via Stripe.</p>
                   </div>
                 </label>
               </div>

@@ -46,7 +46,8 @@ export default function AdminUsersPage() {
 
       <div className={styles.sectionContainer}>
         <div className={styles.recentTable}>
-          <table className={styles.table}>
+          <div className={styles.tableWrapper}>
+            <table className={styles.table}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -63,8 +64,8 @@ export default function AdminUsersPage() {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    <select 
-                      value={user.role} 
+                    <select
+                      value={user.role}
                       onChange={(e) => handleRoleChange(user._id, e.target.value)}
                       className={styles.statusSelect}
                     >
@@ -92,6 +93,7 @@ export default function AdminUsersPage() {
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </div>
   );

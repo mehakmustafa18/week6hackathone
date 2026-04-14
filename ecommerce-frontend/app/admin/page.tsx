@@ -26,7 +26,7 @@ export default function AdminDashboardPage() {
           api.get('/orders/admin/all?limit=5'),
           api.get('/products?limit=1')
         ]);
-        
+
         setStats({
           ...statsRes.data,
           totalProducts: productsRes.data.total
@@ -78,6 +78,7 @@ export default function AdminDashboardPage() {
             <h2 className={styles.tableTitle}>Recent Orders</h2>
             <button className={styles.viewAllLink}>View All</button>
           </div>
+        <div className={styles.tableWrapper}>
           <table className={styles.table}>
             <thead>
               <tr>
@@ -105,13 +106,14 @@ export default function AdminDashboardPage() {
             </tbody>
           </table>
         </div>
+        </div>
 
         <div className={styles.quickActions}>
           <div className={styles.card}>
             <h3 className={styles.tableTitle}>Quick Actions</h3>
             <div className={styles.actionGrid}>
-              <button onClick={() => window.location.href='/admin/products'}>Add New Product</button>
-              <button onClick={() => window.location.href='/admin/orders'}>Manage Shipments</button>
+              <button onClick={() => window.location.href = '/admin/products'}>Add New Product</button>
+              <button onClick={() => window.location.href = '/admin/orders'}>Manage Shipments</button>
               <button>Broadcast Sale Notification</button>
             </div>
           </div>

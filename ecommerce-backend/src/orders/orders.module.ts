@@ -8,6 +8,9 @@ import { UsersModule } from '../users/users.module';
 import { NotificationsModule } from '../notifications/notifications.module';
 import { CartModule } from '../cart/cart.module';
 
+import { StripeService } from './stripe.service';
+import { WebhookController } from './webhook.controller';
+
 @Module({
     imports: [
         MongooseModule.forFeature([
@@ -18,8 +21,8 @@ import { CartModule } from '../cart/cart.module';
         NotificationsModule,
         CartModule,
     ],
-    controllers: [OrdersController],
-    providers: [OrdersService],
+    controllers: [OrdersController, WebhookController],
+    providers: [OrdersService, StripeService],
     exports: [OrdersService],
 })
 export class OrdersModule { }

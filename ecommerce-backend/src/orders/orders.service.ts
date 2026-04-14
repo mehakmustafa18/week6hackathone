@@ -17,6 +17,7 @@ import { NotificationsService } from '../notifications/notifications.service';
 import { NotificationType } from '../notifications/notification.schema';
 import { ConfigService } from '@nestjs/config';
 import { CartService } from '../cart/cart.service';
+import { StripeService } from './stripe.service';
 
 @Injectable()
 export class OrdersService {
@@ -28,6 +29,7 @@ export class OrdersService {
         private notificationsService: NotificationsService,
         private configService: ConfigService,
         private cartService: CartService,
+        private stripeService: StripeService,
     ) { }
 
     async createOrder(userId: string, dto: CreateOrderDto): Promise<OrderDocument> {
@@ -133,10 +135,14 @@ export class OrdersService {
                         discount: Math.round(totalDiscount * 100) / 100,
                         paymentMethod: dto.paymentMethod,
                         paymentStatus:
-                            dto.paymentMethod === PaymentMethod.CASH
+                            dto.paymentMethod === PaymentMethod.STRIPE && totalAmount > 0
+                                ? PaymentStatus.PENDING
+                                : dto.paymentMethod === PaymentMethod.CASH && totalAmount > 0
                                 ? PaymentStatus.PENDING
                                 : PaymentStatus.PAID,
-                        status: OrderStatus.CONFIRMED,
+                        status: (dto.paymentMethod === PaymentMethod.STRIPE || dto.paymentMethod === PaymentMethod.CASH) && totalAmount > 0 
+                            ? OrderStatus.PENDING 
+                            : OrderStatus.CONFIRMED,
                         shippingAddress: dto.shippingAddress,
                         notes: dto.notes,
                     },
@@ -144,7 +150,24 @@ export class OrdersService {
                 { session },
             );
 
-            // Award loyalty points earned
+            // If Stripe and total > 0, create checkout session and return it
+            if (dto.paymentMethod === PaymentMethod.STRIPE && totalAmount > 0) {
+                const user = await this.usersService.findById(userId);
+                const stripeSession = await this.stripeService.createCheckoutSession(order, user.email);
+                
+                order.stripeSessionId = stripeSession.id;
+                await order.save({ session });
+
+                await session.commitTransaction();
+                session.endSession();
+
+                // Clear cart immediately since order is created
+                await this.cartService.clearCart(userId);
+
+                return { ...order.toObject(), checkoutUrl: stripeSession.url } as any;
+            }
+
+            // Award loyalty points earned (Only for non-stripe payments)
             if (totalPointsEarned > 0) {
                 await this.usersService.addLoyaltyPoints(userId, totalPointsEarned, session);
             }
@@ -219,10 +242,18 @@ export class OrdersService {
 
         if (!order) throw new NotFoundException('Order not found');
 
-        const isOwner = order.user?._id?.toString() === userId;
-        const isAdmin = ['admin', 'super_admin'].includes(userRole);
+        // Extract the owner ID safely whether populated or not
+        const orderOwnerId = (order.user as any)?._id || order.user;
+        
+        console.log(`[OrdersService] Checking access for order: ${orderId}`);
+        console.log(`[OrdersService] Order Owner: ${orderOwnerId}`);
+        console.log(`[OrdersService] Requesting User: ${userId}`);
+
+        const isOwner = orderOwnerId.toString() === userId.toString();
+        const isAdmin = ['admin', 'super_admin'].includes(userRole?.toLowerCase());
 
         if (!isOwner && !isAdmin) {
+            console.warn(`[OrdersService] Access DENIED for user ${userId} to order ${orderId}`);
             throw new ForbiddenException('You cannot access this order');
         }
 
@@ -285,5 +316,79 @@ export class OrdersService {
             pendingOrders,
             deliveredOrders,
         };
+    }
+
+    async finalizeStripeOrder(sessionId: string, paymentIntentId: string) {
+        const order = await this.orderModel.findOne({ stripeSessionId: sessionId });
+        if (!order) throw new NotFoundException('Order not found for session');
+
+        if (order.paymentStatus === PaymentStatus.PAID) return order;
+
+        order.paymentStatus = PaymentStatus.PAID;
+        order.status = OrderStatus.CONFIRMED;
+        order.stripePaymentIntentId = paymentIntentId;
+        await order.save();
+
+        // Award loyalty points
+        if (order.totalPointsEarned > 0) {
+            const updatedUser = await this.usersService.addLoyaltyPoints(order.user.toString(), order.totalPointsEarned);
+            console.log(`[OrdersService] Points awarded to user ${order.user.toString()}. New balance: ${updatedUser.loyaltyPoints}`);
+            
+            await this.notificationsService.createUserNotification(
+                order.user.toString(),
+                '🌟 Loyalty Points Earned!',
+                `You earned ${order.totalPointsEarned} loyalty points from your recent purchase!`,
+                NotificationType.POINTS,
+                { pointsEarned: order.totalPointsEarned },
+            );
+        }
+
+        // Send confirmation notification
+        await this.notificationsService.createUserNotification(
+            order.user.toString(),
+            '✅ Payment Successful!',
+            `Your payment for order #${order.orderNumber} was successful. Your order is now being processed.`,
+            NotificationType.ORDER,
+            { orderId: order._id, orderNumber: order.orderNumber },
+        );
+
+        // Notify admins
+        await this.notificationsService.notifyAdmins(
+            '💰 New Stripe Payment!',
+            `Order #${order.orderNumber} has been paid via Stripe ($${order.totalAmount}).`,
+            NotificationType.ORDER,
+            { orderId: order._id },
+        );
+
+        return order;
+    }
+
+    async failStripeOrder(sessionId: string) {
+        const order = await this.orderModel.findOne({ stripeSessionId: sessionId });
+        if (!order || order.paymentStatus === PaymentStatus.PAID) return;
+
+        order.paymentStatus = PaymentStatus.FAILED;
+        order.status = OrderStatus.CANCELLED;
+        await order.save();
+
+        // Restore stock
+        for (const item of order.items) {
+            await this.productModel.findByIdAndUpdate(item.product, {
+                $inc: { stock: item.quantity }
+            });
+        }
+
+        // Return loyalty points used
+        if (order.totalPointsUsed > 0) {
+            await this.usersService.addLoyaltyPoints(order.user.toString(), order.totalPointsUsed);
+        }
+
+        await this.notificationsService.createUserNotification(
+            order.user.toString(),
+            '❌ Payment Failed',
+            `Your payment for order #${order.orderNumber} failed or was cancelled. Your items have been returned to stock.`,
+            NotificationType.ORDER,
+            { orderId: order._id },
+        );
     }
 }

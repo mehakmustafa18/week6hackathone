@@ -136,6 +136,18 @@
   background: #fdfdfd;
 }
 
+.disabledOption {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  background-color: #f9f9f9;
+  border-color: #eee !important;
+  pointer-events: none;
+}
+
+.disabledOption input {
+  cursor: not-allowed;
+}
+
 .orderSummary {
   position: sticky;
   top: 100px;
