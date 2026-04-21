@@ -72,14 +72,15 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       return;
     }
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-    console.log(`[Socket] Attempting connection to ${API_URL}/notifications...`);
+    const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000';
+    console.log(`[Socket] Attempting connection to ${SOCKET_URL}/notifications...`);
     
-    // Creating socket without forcing 'websocket' transport to allow polling as fallback
-    const newSocket = io(`${API_URL}/notifications`, {
+    const newSocket = io(`${SOCKET_URL}/notifications`, {
       auth: { token },
+      transports: ['polling', 'websocket'],
       reconnectionAttempts: 10,
       reconnectionDelay: 2000,
+      path: '/socket.io',
     });
 
     newSocket.on('connect', () => {
