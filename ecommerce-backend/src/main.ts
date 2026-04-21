@@ -17,7 +17,8 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  app.useWebSocketAdapter(new IoAdapter(app));
+  const ioAdapter = new IoAdapter(app);
+  app.useWebSocketAdapter(ioAdapter);
 
   app.useGlobalPipes(
     new ValidationPipe({

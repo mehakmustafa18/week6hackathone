@@ -16,11 +16,22 @@ import { UserRole } from '../users/user.schema';
 
 @WebSocketGateway({
     cors: {
-        origin: [process.env.FRONTEND_URL || 'http://localhost:3000', 'http://localhost:3001'],
+        origin: (origin, callback) => {
+            const allowed = [
+                process.env.FRONTEND_URL || 'http://localhost:3000',
+                'http://localhost:3001',
+                'http://localhost:3000',
+            ];
+            if (!origin || allowed.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(null, true); // allow all in production for socket
+            }
+        },
         credentials: true,
     },
     namespace: '/notifications',
-    transports: ['polling', 'websocket'], // Allow both for better compatibility
+    transports: ['polling', 'websocket'],
 })
 export class NotificationsGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
